@@ -10,13 +10,19 @@ import {
   MenuIcon,
 } from '@heroicons/react/outline';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const Header = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
   return (
     <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="mx-5 flex max-w-6xl justify-between bg-white lg:mx-auto">
-        <div className="relative hidden w-24 cursor-pointer lg:inline-grid">
+        <div
+          onClick={() => router.push('/')}
+          className="relative hidden w-24 cursor-pointer lg:inline-grid"
+        >
           <Image
             src={
               'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2880px-Instagram_logo.svg.png'
@@ -26,7 +32,10 @@ const Header = () => {
             alt="logo-pic"
           />
         </div>
-        <div className="relative w-10 flex-shrink-0 cursor-pointer lg:hidden">
+        <div
+          onClick={() => router.push('/')}
+          className="relative w-10 flex-shrink-0 cursor-pointer lg:hidden"
+        >
           <Image
             src={
               'https://1000logos.net/wp-content/uploads/2017/02/insta-logo.png'
@@ -49,7 +58,10 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center justify-end space-x-4">
-          <HomeIcon className="navBtn" />
+          <HomeIcon
+            onClick={() => router.push('/')}
+            className="navBtn"
+          />
           <MenuIcon className="h-6 cursor-pointer md:hidden" />
 
           {session ? (
