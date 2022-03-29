@@ -8,6 +8,8 @@ import {
   HeartIcon,
   PaperAirplaneIcon,
   MenuIcon,
+  LoginIcon,
+  LogoutIcon,
 } from '@heroicons/react/outline';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -37,7 +39,7 @@ const Header = () => {
         </div>
         <div
           onClick={() => router.push('/')}
-          className="relative w-10 flex-shrink-0 cursor-pointer lg:hidden"
+          className="relative w-6 flex-shrink-0 cursor-pointer lg:hidden"
         >
           <Image
             src={
@@ -49,7 +51,7 @@ const Header = () => {
           />
         </div>
         <div className="max-w-xs">
-          <div className="relative mt-1 rounded-md p-3">
+          <div className="relative mt-1 rounded-md pb-3 pt-3 pl-3 pr-0 md:p-3">
             <div className="pointer-events-none absolute inset-y-0 flex items-center pl-3">
               <SearchIcon className="h-5 w-5 text-gray-500" />
             </div>
@@ -65,7 +67,23 @@ const Header = () => {
             onClick={() => router.push('/')}
             className="navBtn"
           />
-          <MenuIcon className="h-6 cursor-pointer md:hidden" />
+          {session ? (
+            <>
+              <PlusCircleIcon
+                onClick={() => setOpen(true)}
+                className="h-8 w-8 cursor-pointer md:hidden"
+              />
+              {/* <LogoutIcon
+                onClick={signOut}
+                className="h-6 cursor-pointer md:hidden"
+              /> */}
+            </>
+          ) : (
+            <LoginIcon
+              onClick={signIn}
+              className="h-6 cursor-pointer md:hidden"
+            />
+          )}
 
           {session ? (
             <Fragment>
@@ -88,11 +106,13 @@ const Header = () => {
                   'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
                 }
                 alt="ava-pic"
-                className="h-10 w-10 cursor-pointer rounded-full object-cover"
+                className="h-8 w-8 cursor-pointer rounded-full object-cover md:h-10 md:w-10"
               />
             </Fragment>
           ) : (
-            <button onClick={signIn}>Sign In</button>
+            <button onClick={signIn} className="hidden md:block">
+              Sign In
+            </button>
           )}
         </div>
       </div>

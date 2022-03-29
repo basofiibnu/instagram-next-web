@@ -18,7 +18,7 @@ const Stories = () => {
   }, []);
 
   return (
-    <div className="mt-8 flex gap-1 space-x-2 overflow-x-scroll rounded-sm border border-gray-200 bg-white p-6 scrollbar-track-gray-100 scrollbar-thumb-gray-700">
+    <div className="mt-0 flex gap-1 space-x-2 overflow-x-scroll rounded-sm border border-t-0 border-gray-200 bg-white p-6 scrollbar-track-gray-100 scrollbar-thumb-gray-700 md:mt-8 md:border-t-[1px]">
       {session && (
         <Story
           img={session.user.image}
