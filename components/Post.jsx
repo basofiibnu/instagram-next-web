@@ -93,7 +93,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
           alt="user-profile-pic"
           className="mr-3 h-12 w-12 rounded-full border object-contain p-1"
         />
-        <p className="flex-1 font-bold">{username}</p>
+        <p className="flex-1 font-semibold">{username}</p>
         <DotsHorizontalIcon className="h-5" />
       </div>
       <img
@@ -118,42 +118,51 @@ const Post = ({ id, username, userImg, img, caption }) => {
           <BookmarkIcon className="btn" />
         </div>
       )}
-      <p className="truncate p-5">
+      <p className="truncate px-5 py-3 pb-1">
         {likes.length > 0 && (
-          <p className="mb-1 font-bold">{likes.length} likes</p>
+          <p className="text-md font-semibold">
+            {likes.length} likes
+          </p>
         )}
-        <span className="mr-1 font-bold">{username}</span>
+        <span className="mr-1 font-semibold">{username}</span>
         {caption}
       </p>
-
+      <p className="ml-5 mb-1 text-sm text-gray-500">
+        View all comments
+      </p>
       {comments.length > 0 && (
-        <div className="ml-10 h-20 overflow-y-scroll scrollbar-thin scrollbar-thumb-black">
+        <div className="ml-5 mr-5 h-auto overflow-y-scroll scrollbar-track-gray-100 scrollbar-thumb-gray-700">
           {comments.map((commentData) => (
             <div
               key={commentData.id}
-              className="mb-3 flex items-center space-x-2"
+              className="flex items-center justify-between space-x-2"
             >
-              <img
+              {/* <img
                 src={commentData.data().userImage}
                 alt="comment-pic"
                 className="h-7 rounded-full"
-              />
-              <p className="flex-1 text-sm">
-                <span className="font-bold">
+              /> */}
+              <p className="text-sm">
+                <span className="font-semibold">
                   {commentData.data().username}
                 </span>{' '}
                 {commentData.data().comment}
               </p>
-              <Moment fromNow className="pr-5 text-xs">
+              {/* <Moment fromNow className="pr-5 text-xs">
                 {commentData.data().timestamp?.toDate()}
-              </Moment>
+              </Moment> */}
+              <HeartIcon
+                onClick={likePost}
+                className="btn mr-5 text-gray-300"
+                style={{ width: 20 }}
+              />
             </div>
           ))}
         </div>
       )}
 
       {session && (
-        <form className="flex items-center p-4">
+        <form className="flex items-center px-4 pb-4 pt-1">
           <EmojiHappyIcon className="h-7" />
           <input
             type="text"
@@ -168,7 +177,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
             type="submit"
             disabled={!comment.trim()}
             onClick={sendComment}
-            className="font-semibold text-blue-400"
+            className="cursor-pointer font-semibold text-blue-400"
           >
             Post
           </button>
